@@ -1,9 +1,8 @@
-# REPORT — notes for whoever (human or agent) reviews this
+# REPORT — Computer-use capability dig & replay
 
 I built this so the durable object is not the chat with the model. It is a small
 YAML capability that a dumb replay engine can run later, with evidence you can
-diff. If you are an agent reading this: start at `capabilities/` and
-`evidence/`, then come back here for the why.
+diff. Start at `capabilities/` and `evidence/`, then come back here for the why.
 
 ## Honest provenance
 
