@@ -1,0 +1,1069 @@
+{
+  "$defs": {
+    "AppInfo": {
+      "properties": {
+        "vendor": {
+          "title": "Vendor",
+          "type": "string"
+        },
+        "product": {
+          "title": "Product",
+          "type": "string"
+        },
+        "compatible_versions": {
+          "default": "*",
+          "title": "Compatible Versions",
+          "type": "string"
+        }
+      },
+      "required": [
+        "vendor",
+        "product"
+      ],
+      "title": "AppInfo",
+      "type": "object"
+    },
+    "CapabilityBody": {
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "version": {
+          "default": "1.0.0",
+          "title": "Version",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "description": {
+          "default": "",
+          "title": "Description",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/$defs/CapabilityStatus",
+          "default": "draft"
+        },
+        "app": {
+          "$ref": "#/$defs/AppInfo"
+        },
+        "inputs": {
+          "additionalProperties": {
+            "$ref": "#/$defs/FieldSpec"
+          },
+          "title": "Inputs",
+          "type": "object"
+        },
+        "outputs": {
+          "additionalProperties": {
+            "$ref": "#/$defs/FieldSpec"
+          },
+          "title": "Outputs",
+          "type": "object"
+        },
+        "risk": {
+          "$ref": "#/$defs/RiskClass",
+          "default": "read_only"
+        },
+        "preconditions": {
+          "items": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "title": "Preconditions",
+          "type": "array"
+        },
+        "steps": {
+          "items": {
+            "$ref": "#/$defs/CapabilityStep"
+          },
+          "title": "Steps",
+          "type": "array"
+        },
+        "outcomes": {
+          "additionalProperties": {
+            "$ref": "#/$defs/OutcomeSpec"
+          },
+          "title": "Outcomes",
+          "type": "object"
+        },
+        "recoverables": {
+          "items": {
+            "$ref": "#/$defs/Recoverable"
+          },
+          "title": "Recoverables",
+          "type": "array"
+        },
+        "success": {
+          "items": {
+            "$ref": "#/$defs/SuccessCondition"
+          },
+          "title": "Success",
+          "type": "array"
+        },
+        "provenance": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Provenance"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "app"
+      ],
+      "title": "CapabilityBody",
+      "type": "object"
+    },
+    "CapabilityStatus": {
+      "enum": [
+        "draft",
+        "approved",
+        "deprecated"
+      ],
+      "title": "CapabilityStatus",
+      "type": "string"
+    },
+    "CapabilityStep": {
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "intent": {
+          "title": "Intent",
+          "type": "string"
+        },
+        "action": {
+          "enum": [
+            "click",
+            "type",
+            "select",
+            "press",
+            "extract",
+            "navigate"
+          ],
+          "title": "Action",
+          "type": "string"
+        },
+        "target": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/StepTarget"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Value"
+        },
+        "key": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Key"
+        },
+        "url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Url"
+        },
+        "extract": {
+          "anyOf": [
+            {
+              "additionalProperties": {
+                "$ref": "#/$defs/ExtractField"
+              },
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Extract"
+        },
+        "expect": {
+          "anyOf": [
+            {
+              "discriminator": {
+                "mapping": {
+                  "any_of": "#/$defs/ExpectAnyOf",
+                  "element_visible": "#/$defs/ExpectElementVisible",
+                  "text_visible": "#/$defs/ExpectTextVisible",
+                  "url_matches": "#/$defs/ExpectUrlMatches"
+                },
+                "propertyName": "kind"
+              },
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/ExpectElementVisible"
+                },
+                {
+                  "$ref": "#/$defs/ExpectTextVisible"
+                },
+                {
+                  "$ref": "#/$defs/ExpectUrlMatches"
+                },
+                {
+                  "$ref": "#/$defs/ExpectAnyOf"
+                }
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Expect"
+        },
+        "requires_confirmation": {
+          "default": false,
+          "title": "Requires Confirmation",
+          "type": "boolean"
+        },
+        "provenance": {
+          "anyOf": [
+            {
+              "enum": [
+                "agent",
+                "human"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Provenance"
+        }
+      },
+      "required": [
+        "id",
+        "intent",
+        "action"
+      ],
+      "title": "CapabilityStep",
+      "type": "object"
+    },
+    "ExpectAnyOf": {
+      "properties": {
+        "kind": {
+          "const": "any_of",
+          "default": "any_of",
+          "title": "Kind",
+          "type": "string"
+        },
+        "any_of": {
+          "items": {
+            "discriminator": {
+              "mapping": {
+                "element_visible": "#/$defs/ExpectElementVisible",
+                "text_visible": "#/$defs/ExpectTextVisible",
+                "url_matches": "#/$defs/ExpectUrlMatches"
+              },
+              "propertyName": "kind"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/ExpectTextVisible"
+              },
+              {
+                "$ref": "#/$defs/ExpectElementVisible"
+              },
+              {
+                "$ref": "#/$defs/ExpectUrlMatches"
+              }
+            ]
+          },
+          "title": "Any Of",
+          "type": "array"
+        }
+      },
+      "required": [
+        "any_of"
+      ],
+      "title": "ExpectAnyOf",
+      "type": "object"
+    },
+    "ExpectElementVisible": {
+      "properties": {
+        "kind": {
+          "const": "element_visible",
+          "default": "element_visible",
+          "title": "Kind",
+          "type": "string"
+        },
+        "target_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Target Ref"
+        },
+        "target": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/StepTarget"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "title": "ExpectElementVisible",
+      "type": "object"
+    },
+    "ExpectTextVisible": {
+      "properties": {
+        "kind": {
+          "const": "text_visible",
+          "default": "text_visible",
+          "title": "Kind",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "then": {
+          "anyOf": [
+            {
+              "const": "continue",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Then"
+        },
+        "outcome": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Outcome"
+        }
+      },
+      "required": [
+        "text"
+      ],
+      "title": "ExpectTextVisible",
+      "type": "object"
+    },
+    "ExpectUrlMatches": {
+      "properties": {
+        "kind": {
+          "const": "url_matches",
+          "default": "url_matches",
+          "title": "Kind",
+          "type": "string"
+        },
+        "pattern": {
+          "title": "Pattern",
+          "type": "string"
+        },
+        "outcome": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Outcome"
+        }
+      },
+      "required": [
+        "pattern"
+      ],
+      "title": "ExpectUrlMatches",
+      "type": "object"
+    },
+    "ExtractField": {
+      "properties": {
+        "target": {
+          "$ref": "#/$defs/StepTarget"
+        },
+        "parse": {
+          "default": "text",
+          "enum": [
+            "currency",
+            "text",
+            "number"
+          ],
+          "title": "Parse",
+          "type": "string"
+        }
+      },
+      "required": [
+        "target"
+      ],
+      "title": "ExtractField",
+      "type": "object"
+    },
+    "FieldSpec": {
+      "properties": {
+        "type": {
+          "default": "string",
+          "title": "Type",
+          "type": "string"
+        },
+        "pattern": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Pattern"
+        },
+        "format": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Format"
+        },
+        "sensitivity": {
+          "$ref": "#/$defs/Sensitivity",
+          "default": "public"
+        },
+        "redact_in_logs": {
+          "default": false,
+          "title": "Redact In Logs",
+          "type": "boolean"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        }
+      },
+      "title": "FieldSpec",
+      "type": "object"
+    },
+    "FrameHint": {
+      "properties": {
+        "name_hint": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Name Hint"
+        },
+        "index_fallback": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Index Fallback"
+        }
+      },
+      "title": "FrameHint",
+      "type": "object"
+    },
+    "OutcomeSpec": {
+      "properties": {
+        "kind": {
+          "default": "business",
+          "enum": [
+            "business",
+            "success"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "outputs": {
+          "additionalProperties": true,
+          "title": "Outputs",
+          "type": "object"
+        }
+      },
+      "title": "OutcomeSpec",
+      "type": "object"
+    },
+    "Provenance": {
+      "properties": {
+        "discovered_by": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Discovered By"
+        },
+        "goal_text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Goal Text"
+        },
+        "reviewed_by": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reviewed By"
+        }
+      },
+      "title": "Provenance",
+      "type": "object"
+    },
+    "Recoverable": {
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "detect": {
+          "discriminator": {
+            "mapping": {
+              "any_of": "#/$defs/ExpectAnyOf",
+              "element_visible": "#/$defs/ExpectElementVisible",
+              "text_visible": "#/$defs/ExpectTextVisible",
+              "url_matches": "#/$defs/ExpectUrlMatches"
+            },
+            "propertyName": "kind"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/ExpectElementVisible"
+            },
+            {
+              "$ref": "#/$defs/ExpectTextVisible"
+            },
+            {
+              "$ref": "#/$defs/ExpectUrlMatches"
+            },
+            {
+              "$ref": "#/$defs/ExpectAnyOf"
+            }
+          ],
+          "title": "Detect"
+        },
+        "handle": {
+          "$ref": "#/$defs/RecoverableHandle"
+        },
+        "max_times": {
+          "default": 3,
+          "title": "Max Times",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "detect",
+        "handle"
+      ],
+      "title": "Recoverable",
+      "type": "object"
+    },
+    "RecoverableHandle": {
+      "properties": {
+        "action": {
+          "anyOf": [
+            {
+              "enum": [
+                "click",
+                "press"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Action"
+        },
+        "target": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/StepTarget"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "escalate": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Escalate"
+        }
+      },
+      "title": "RecoverableHandle",
+      "type": "object"
+    },
+    "RiskClass": {
+      "enum": [
+        "read_only",
+        "reversible_write",
+        "irreversible"
+      ],
+      "title": "RiskClass",
+      "type": "string"
+    },
+    "Sensitivity": {
+      "enum": [
+        "public",
+        "internal_id",
+        "pii",
+        "financial",
+        "secret"
+      ],
+      "title": "Sensitivity",
+      "type": "string"
+    },
+    "StepTarget": {
+      "properties": {
+        "ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ref"
+        },
+        "frame": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FrameHint"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Frame"
+        },
+        "strategies": {
+          "items": {
+            "discriminator": {
+              "mapping": {
+                "css": "#/$defs/StrategyByCss",
+                "heuristic": "#/$defs/StrategyByHeuristic",
+                "label_proximity": "#/$defs/StrategyByLabel",
+                "name_attr": "#/$defs/StrategyByNameAttr",
+                "role": "#/$defs/StrategyByRole",
+                "table_cell": "#/$defs/StrategyByTableCell",
+                "text": "#/$defs/StrategyByText"
+              },
+              "propertyName": "by"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/StrategyByRole"
+              },
+              {
+                "$ref": "#/$defs/StrategyByText"
+              },
+              {
+                "$ref": "#/$defs/StrategyByCss"
+              },
+              {
+                "$ref": "#/$defs/StrategyByLabel"
+              },
+              {
+                "$ref": "#/$defs/StrategyByTableCell"
+              },
+              {
+                "$ref": "#/$defs/StrategyByNameAttr"
+              },
+              {
+                "$ref": "#/$defs/StrategyByHeuristic"
+              }
+            ]
+          },
+          "title": "Strategies",
+          "type": "array"
+        },
+        "visual_anchor": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/VisualAnchor"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "title": "StepTarget",
+      "type": "object"
+    },
+    "StrategyByCss": {
+      "properties": {
+        "by": {
+          "const": "css",
+          "default": "css",
+          "title": "By",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "title": "StrategyByCss",
+      "type": "object"
+    },
+    "StrategyByHeuristic": {
+      "properties": {
+        "by": {
+          "const": "heuristic",
+          "default": "heuristic",
+          "title": "By",
+          "type": "string"
+        },
+        "text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Text"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Value"
+        }
+      },
+      "title": "StrategyByHeuristic",
+      "type": "object"
+    },
+    "StrategyByLabel": {
+      "properties": {
+        "by": {
+          "const": "label_proximity",
+          "default": "label_proximity",
+          "title": "By",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        }
+      },
+      "required": [
+        "label"
+      ],
+      "title": "StrategyByLabel",
+      "type": "object"
+    },
+    "StrategyByNameAttr": {
+      "properties": {
+        "by": {
+          "const": "name_attr",
+          "default": "name_attr",
+          "title": "By",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "StrategyByNameAttr",
+      "type": "object"
+    },
+    "StrategyByRole": {
+      "properties": {
+        "by": {
+          "const": "role",
+          "default": "role",
+          "title": "By",
+          "type": "string"
+        },
+        "role": {
+          "title": "Role",
+          "type": "string"
+        },
+        "name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Name"
+        },
+        "exact": {
+          "default": false,
+          "title": "Exact",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "role"
+      ],
+      "title": "StrategyByRole",
+      "type": "object"
+    },
+    "StrategyByTableCell": {
+      "properties": {
+        "by": {
+          "const": "table_cell",
+          "default": "table_cell",
+          "title": "By",
+          "type": "string"
+        },
+        "row_header": {
+          "title": "Row Header",
+          "type": "string"
+        },
+        "column_header": {
+          "default": "Balance",
+          "title": "Column Header",
+          "type": "string"
+        }
+      },
+      "required": [
+        "row_header"
+      ],
+      "title": "StrategyByTableCell",
+      "type": "object"
+    },
+    "StrategyByText": {
+      "properties": {
+        "by": {
+          "const": "text",
+          "default": "text",
+          "title": "By",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "exact": {
+          "default": false,
+          "title": "Exact",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "text"
+      ],
+      "title": "StrategyByText",
+      "type": "object"
+    },
+    "SuccessCondition": {
+      "properties": {
+        "kind": {
+          "default": "output_present",
+          "enum": [
+            "output_present",
+            "text_visible"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "output": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Output"
+        },
+        "text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Text"
+        }
+      },
+      "title": "SuccessCondition",
+      "type": "object"
+    },
+    "VisualAnchor": {
+      "properties": {
+        "bbox_rel": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Bbox Rel"
+        },
+        "crop_hash": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Crop Hash"
+        }
+      },
+      "title": "VisualAnchor",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "schema_version": {
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "capability": {
+      "$ref": "#/$defs/CapabilityBody"
+    }
+  },
+  "required": [
+    "capability"
+  ],
+  "title": "CapabilityArtifact",
+  "type": "object"
+}

@@ -1,0 +1,4 @@
+{"ts": "2026-09-29T15:05:51.672074+00:00", "actor": "automation", "kind": "replay_start", "step_id": null, "data": {"capability_id": "cucore.member.read_savings_balance", "inputs_keys": ["member_number"]}}
+{"ts": "2026-09-29T15:05:59.789819+00:00", "actor": "automation", "kind": "recovery", "step_id": null, "data": {"id": "system_notice"}}
+{"ts": "2026-09-29T15:06:16.518737+00:00", "actor": "automation", "kind": "replay_end", "step_id": null, "data": {"status": "success", "capability_id": "cucore.member.read_savings_balance", "capability_version": "1.2.0", "run_id": "03850dd466eb", "outputs": {"savings_balance": 2418.55}, "outcome": null, "failure": null, "recoveries": [{"id": "system_notice", "step_id": "s1_open_search", "detail": "dismissed"}], "drift_signals": [], "duration_ms": 24846, "intervention_id": null}}
+{"ts": "2026-09-29T15:06:16.623129+00:00", "actor": "automation", "kind": "trace", "step_id": null, "data": {"path": "trace.zip", "bytes": 325852}}

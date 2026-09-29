@@ -1,0 +1,7 @@
+01_discovery_read_balance needs a real Anthropic Messages API run.
+Set ANTHROPIC_API_KEY, then:
+  CUA_MOCK_LLM=0 uv run python scripts/generate_evidence_pack.py
+This pack will not invent message_id / usage / tool_use rows.
+
+NOTE: the approved replay artifact is seeded (reviewed_by: seed).
+Discovery is demonstrated separately when a live key is present.

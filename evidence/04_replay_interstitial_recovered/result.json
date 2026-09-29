@@ -1,0 +1,21 @@
+{
+  "status": "success",
+  "capability_id": "cucore.member.read_savings_balance",
+  "capability_version": "1.2.0",
+  "run_id": "03850dd466eb",
+  "outputs": {
+    "savings_balance": 2418.55
+  },
+  "outcome": null,
+  "failure": null,
+  "recoveries": [
+    {
+      "id": "system_notice",
+      "step_id": "s1_open_search",
+      "detail": "dismissed"
+    }
+  ],
+  "drift_signals": [],
+  "duration_ms": 24846,
+  "intervention_id": null
+}

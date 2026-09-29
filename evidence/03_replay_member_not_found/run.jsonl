@@ -1,0 +1,3 @@
+{"ts": "2026-09-29T15:05:37.772073+00:00", "actor": "automation", "kind": "replay_start", "step_id": null, "data": {"capability_id": "cucore.member.read_savings_balance", "inputs_keys": ["member_number"]}}
+{"ts": "2026-09-29T15:05:50.080761+00:00", "actor": "automation", "kind": "replay_end", "step_id": null, "data": {"status": "business_outcome", "capability_id": "cucore.member.read_savings_balance", "capability_version": "1.2.0", "run_id": "03_replay_member_not_found", "outputs": null, "outcome": "member_not_found", "failure": null, "recoveries": [], "drift_signals": [], "duration_ms": 12308, "intervention_id": null}}
+{"ts": "2026-09-29T15:05:50.141142+00:00", "actor": "automation", "kind": "trace", "step_id": null, "data": {"path": "trace.zip", "bytes": 138567}}

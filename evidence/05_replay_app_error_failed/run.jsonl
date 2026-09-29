@@ -1,0 +1,3 @@
+{"ts": "2026-09-29T15:06:18.181999+00:00", "actor": "automation", "kind": "replay_start", "step_id": null, "data": {"capability_id": "cucore.member.read_savings_balance", "inputs_keys": ["member_number"]}}
+{"ts": "2026-09-29T15:06:43.023510+00:00", "actor": "automation", "kind": "screenshot", "step_id": null, "data": {"path": "screenshots/app_error.png"}}
+{"ts": "2026-09-29T15:06:43.098067+00:00", "actor": "automation", "kind": "trace", "step_id": null, "data": {"path": "trace.zip", "bytes": 173184}}

@@ -1,0 +1,16 @@
+{"ts": "2026-09-29T15:07:13.739800+00:00", "actor": "automation", "kind": "fault_armed", "step_id": null, "data": {"fault": "session_expire"}}
+{"ts": "2026-09-29T15:07:13.741365+00:00", "actor": "automation", "kind": "replay_start", "step_id": null, "data": {"capability_id": "cucore.member.read_savings_balance", "inputs_keys": ["member_number"]}}
+{"ts": "2026-09-29T15:07:19.938762+00:00", "actor": "automation", "kind": "screenshot", "step_id": null, "data": {"path": "screenshots/handoff_s2_type_member.png"}}
+{"ts": "2026-09-29T15:07:19.938839+00:00", "actor": "automation", "kind": "needs_human", "step_id": "s2_type_member", "data": {"reason": "session expired", "code": "SESSION_EXPIRED", "screenshot": "evidence/06_handoff_session_expired/screenshots/handoff_s2_type_member.png"}}
+{"ts": "2026-09-29T15:07:19.938918+00:00", "actor": "automation", "kind": "handoff_requested", "step_id": "s2_type_member", "data": {"lease_id": "ea307631fb", "token_suffix": "e738ec"}}
+{"ts": "2026-09-29T15:07:19.961108+00:00", "actor": "human", "kind": "operator_saw_queue", "step_id": null, "data": {"lease_id": "ea307631fb", "reason": "session expired", "step_id": "s2_type_member", "state": "awaiting_human"}}
+{"ts": "2026-09-29T15:07:19.961232+00:00", "actor": "human", "kind": "operator_claimed", "step_id": null, "data": {"owner": "morgan.teller", "lease_id": "ea307631fb", "state": "human"}}
+{"ts": "2026-09-29T15:07:21.141431+00:00", "actor": "human", "kind": "human_relogin", "step_id": null, "data": {"detail": "same Chromium context, cookies refreshed"}}
+{"ts": "2026-09-29T15:07:21.272351+00:00", "actor": "human", "kind": "human_restored_context", "step_id": null, "data": {"clicked": "Member Search", "strategy": "role:Member Search"}}
+{"ts": "2026-09-29T15:07:23.874296+00:00", "actor": "automation", "kind": "screenshot", "step_id": null, "data": {"path": "screenshots/after_human_relogin.png"}}
+{"ts": "2026-09-29T15:07:23.874404+00:00", "actor": "human", "kind": "operator_resume", "step_id": null, "data": {"note": "relogin done", "state": "verifying"}}
+{"ts": "2026-09-29T15:07:23.874443+00:00", "actor": "human", "kind": "operator_verify_ok", "step_id": null, "data": {"state": "automation"}}
+{"ts": "2026-09-29T15:07:25.896245+00:00", "actor": "automation", "kind": "handoff_resumed", "step_id": "s2_type_member", "data": {"lease_id": "ea307631fb", "verified": true}}
+{"ts": "2026-09-29T15:07:40.227318+00:00", "actor": "automation", "kind": "replay_end", "step_id": null, "data": {"status": "success", "capability_id": "cucore.member.read_savings_balance", "capability_version": "1.2.0", "run_id": "d299ec8d74a3", "outputs": {"savings_balance": 2418.55}, "outcome": null, "failure": null, "recoveries": [{"id": "human_handoff", "step_id": "s2_type_member", "detail": "SESSION_EXPIRED: operator resumed lease ea307631fb"}], "drift_signals": [], "duration_ms": 26485, "intervention_id": "ea307631fb"}}
+{"ts": "2026-09-29T15:07:40.326282+00:00", "actor": "automation", "kind": "trace", "step_id": null, "data": {"path": "trace.zip", "bytes": 268245}}
+{"ts": "2026-09-29T15:07:40.326825+00:00", "actor": "automation", "kind": "operator_log", "step_id": null, "data": {"path": "operator_log.jsonl", "events": 21}}

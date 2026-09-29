@@ -1,0 +1,49 @@
+# Safety policy for CUA discovery & replay
+version: 1
+
+allowed_origins:
+  - "http://127.0.0.1:8800"
+  - "http://localhost:8800"
+
+allowed_routes:
+  - "/login"
+  - "/home"
+  - "/frames/*"
+  - "/member/*"
+  - "/search"
+  - "/subaccount/*"
+  - "/interstitial/*"
+  - "/"
+
+allowed_actions:
+  - navigate
+  - click
+  - type
+  - select
+  - press
+  - extract
+  - wait
+
+risk_rules:
+  - id: irreversible_buttons
+    match:
+      button_text_regex: "(?i)submit|confirm|transfer|delete|close account|confirm open"
+  - id: subaccount_confirm_route
+    match:
+      route: "/subaccount/confirm"
+
+irreversible_policy:
+  discovery: require_human_confirmation
+  replay: allow_only_if_approved_and_confirmed
+
+redact:
+  patterns:
+    - name: ssn
+      regex: '\b\d{3}-\d{2}-\d{4}\b'
+      replacement: "[SSN]"
+    - name: account_number
+      regex: '\b\d{10,17}\b'
+      replacement: "[ACCOUNT]"
+    - name: email
+      regex: '\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b'
+      replacement: "[EMAIL]"

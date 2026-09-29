@@ -1,0 +1,128 @@
+name: "Northlake Community CU"
+theme:
+  header_bg: "#1a3a5c"
+  accent: "#c45c26"
+credentials:
+  username: teller
+  password: teller
+nav:
+  - {page: home, label_key: menu_home}
+  - {page: search, label_key: menu_search}
+  - {page: subaccount, label_key: menu_subaccount}
+strings:
+  product_name: "Northlake Community CU"
+  login_title: "Teller Workstation Login"
+  login_error: "Logon rejected — check operator ID"
+  menu_home: "Workstation Home"
+  menu_search: "Member Search"
+  menu_subaccount: "Open Sub-Account"
+  search_heading: "Member Search"
+  member_number_label: "Member #"
+  search_button: "Find Member"
+  no_results: "No member found matching criteria"
+  detail_heading: "Member Detail"
+  accounts_heading: "Accounts"
+  balance_col: "Balance"
+  type_col: "Account Type"
+  nickname_col: "Nickname"
+  subaccount_heading: "Open Sub-Account"
+  select_member: "Select member"
+  account_type_label: "Account Type"
+  nickname_label: "Nickname"
+  deposit_label: "Initial Deposit"
+  review_heading: "Review Sub-Account"
+  submit_subaccount: "Submit"
+  confirm_subaccount: "Confirm Open"
+  invalid_deposit: "Invalid deposit amount"
+  interstitial_title: "System notice"
+  interstitial_body: "System notice: acknowledge to continue."
+  interstitial_ack: "Acknowledge"
+  permission_denied: "You are not authorized to view this member"
+members:
+  - member_no: "10001"
+    name: "Test Member 10001"
+    ssn_masked: "***-**-1001"
+    ssn_full: "111-22-1001"
+    status: Active
+    email: "test10001@example.test"
+    accounts:
+      - {type: "Share Savings", nickname: "Primary Share", balance: "1,234.56"}
+      - {type: "Checking", nickname: "Everyday Checking", balance: "502.10"}
+  - member_no: "10002"
+    name: "Test Member 10002"
+    ssn_masked: "***-**-1002"
+    ssn_full: "111-22-1002"
+    status: Active
+    email: "test10002@example.test"
+    accounts:
+      - {type: "Share Savings", nickname: "Share", balance: "88.00"}
+      - {type: "Checking", nickname: "Checking", balance: "12.40"}
+  - member_no: "10003"
+    name: "Test Member 10003"
+    ssn_masked: "***-**-1003"
+    ssn_full: "111-22-1003"
+    status: Active
+    email: "test10003@example.test"
+    accounts:
+      - {type: "Share Savings", nickname: "Savings", balance: "9,001.00"}
+  - member_no: "10004"
+    name: "Test Member 10004"
+    ssn_masked: "***-**-1004"
+    ssn_full: "111-22-1004"
+    status: Restricted
+    email: "test10004@example.test"
+    accounts:
+      - {type: "Share Savings", nickname: "Share", balance: "0.01"}
+      - {type: "Checking", nickname: "Chk", balance: "0.00"}
+  - member_no: "10005"
+    name: "Test Member 10005"
+    ssn_masked: "***-**-1005"
+    ssn_full: "111-22-1005"
+    status: Active
+    email: "test10005@example.test"
+    accounts:
+      - {type: "Share Savings", nickname: "Nest", balance: "4,400.25"}
+      - {type: "Checking", nickname: "Ops", balance: "210.00"}
+  - member_no: "12345"
+    name: "Test Member 12345"
+    ssn_masked: "***-**-2345"
+    ssn_full: "999-88-2345"
+    status: Active
+    email: "test12345@example.test"
+    accounts:
+      - {type: "Share Savings", nickname: "Primary", balance: "2,418.55"}
+      - {type: "Checking", nickname: "Draft", balance: "110.02"}
+  - member_no: "20001"
+    name: "Test Member 20001"
+    ssn_masked: "***-**-2001"
+    ssn_full: "222-33-2001"
+    status: Active
+    email: "test20001@example.test"
+    accounts:
+      - {type: "Share Savings", nickname: "Share", balance: "750.00"}
+  - member_no: "20002"
+    name: "Test Member 20002"
+    ssn_masked: "***-**-2002"
+    ssn_full: "222-33-2002"
+    status: Active
+    email: "test20002@example.test"
+    accounts:
+      - {type: "Share Savings", nickname: "Share", balance: "3,300.33"}
+      - {type: "Checking", nickname: "Checking", balance: "99.99"}
+  - member_no: "20003"
+    name: "Test Member 20003"
+    ssn_masked: "***-**-2003"
+    ssn_full: "222-33-2003"
+    status: Active
+    email: "test20003@example.test"
+    accounts:
+      - {type: "Share Savings", nickname: "Share", balance: "15.15"}
+  - member_no: "30001"
+    name: "Test Member 30001"
+    ssn_masked: "***-**-3001"
+    ssn_full: "333-44-3001"
+    status: Active
+    email: "test30001@example.test"
+    accounts:
+      - {type: "Share Savings", nickname: "Share", balance: "6,666.66"}
+      - {type: "Checking", nickname: "Checking", balance: "1.00"}

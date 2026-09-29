@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<body style="margin:0;font-family:Tahoma,sans-serif;font-size:12px;background:{{ v.theme.header_bg }};color:#fff;">
+  <table class="c1" cellspacing="0" cellpadding="0" style="width:100%;">
+    <tr><td class="c1" style="font-weight:bold;font-size:13px;padding:12px 8px;border-bottom:1px solid rgba(255,255,255,0.3);">{{ v.strings.product_name }}</td></tr>
+    <tr><td class="c1" style="font-size:10px;padding:8px;opacity:0.85;">Op: {{ user }}</td></tr>
+    {% for item in nav %}
+    <tr><td class="c1"><a class="c1" href="/frames/main?page={{ item.page }}" target="main" style="color:#ffe6c8;text-decoration:none;display:block;padding:6px 8px;">{{ v.strings[item.label_key] }}</a></td></tr>
+    {% endfor %}
+    <tr><td class="c1"><a class="c1" href="/logout" target="_top" style="color:#ffe6c8;text-decoration:none;display:block;padding:6px 8px;">Sign Off</a></td></tr>
+  </table>
+</body>
+</html>

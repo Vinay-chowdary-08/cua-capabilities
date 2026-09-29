@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<body style="margin:0;font-family:Tahoma,Geneva,sans-serif;font-size:13px;background:#f0eee6;color:#222;">
+<table class="c1" style="width:100%;border-collapse:collapse;"><tr><td class="c1" style="padding:16px;vertical-align:top;">
+
+{% if flash %}<div class="c1" style="background:#d4edda;border:1px solid #2d6a4f;padding:8px;margin-bottom:12px;">{{ flash }}</div>{% endif %}
+{% if flash_error %}<div class="c1" style="color:#900;background:#fde8e8;border:1px solid #900;padding:8px;margin-bottom:12px;">{{ flash_error }}</div>{% endif %}
+
+{% if page == "home" %}
+  <div class="c1" style="font-size:16px;color:{{ v.theme.header_bg }};font-weight:bold;margin-bottom:12px;">{{ v.strings.menu_home }}</div>
+  <p class="c1">Select a function from the left menu.</p>
+
+{% elif page == "search" %}
+  <div class="c1" style="font-size:16px;color:{{ v.theme.header_bg }};font-weight:bold;margin-bottom:12px;">{{ v.strings.search_heading }}</div>
+  <form method="post" action="/search" name="memberSearch" target="main">
+    <table class="c1" cellspacing="6">
+      <tr>
+        <td class="c1">{{ v.strings.member_number_label }}</td>
+        <td class="c1"><input type="text" name="qry" size="30" value="" style="border:1px inset #999;padding:3px;"></td>
+      </tr>
+      <tr>
+        <td class="c1"></td>
+        <td class="c1">
+          <input type="hidden" name="kind" value="member_no">
+          <input type="submit" name="btnFind" value="{{ v.strings.search_button }}" style="background:{{ v.theme.accent }};color:#fff;border:2px outset #ccc;padding:4px 12px;">
+        </td>
+      </tr>
+    </table>
+  </form>
+  {% if results is not none %}
+    <br>
+    <table class="c1" style="border-collapse:collapse;background:#fff;">
+      <tr>
+        <td class="c1" style="border:1px solid #999;padding:5px 8px;background:#e8e4d8;font-weight:bold;">{{ v.strings.member_number_label }}</td>
+        <td class="c1" style="border:1px solid #999;padding:5px 8px;background:#e8e4d8;font-weight:bold;">Name</td>
+        <td class="c1" style="border:1px solid #999;padding:5px 8px;background:#e8e4d8;font-weight:bold;">Status</td>
+        <td class="c1" style="border:1px solid #999;padding:5px 8px;background:#e8e4d8;"></td>
+      </tr>
+      {% for m in results %}
+      <tr>
+        <td class="c1" style="border:1px solid #999;padding:5px 8px;">{{ m.member_no }}</td>
+        <td class="c1" style="border:1px solid #999;padding:5px 8px;">{{ m.name }}</td>
+        <td class="c1" style="border:1px solid #999;padding:5px 8px;">{{ m.status }}</td>
+        <td class="c1" style="border:1px solid #999;padding:5px 8px;"><a class="c1" href="/member/{{ m.member_no }}" target="main" style="color:{{ v.theme.header_bg }};">Open</a></td>
+      </tr>
+      {% else %}
+      <tr><td class="c1" colspan="4" style="border:1px solid #999;padding:5px 8px;">{{ v.strings.no_results }}</td></tr>
+      {% endfor %}
+    </table>
+  {% endif %}
+
+{% elif page == "member" and member %}
+  <div class="c1" style="font-size:16px;color:{{ v.theme.header_bg }};font-weight:bold;margin-bottom:12px;">{{ v.strings.detail_heading }}</div>
+  <table class="c1" style="border-collapse:collapse;background:#fff;margin-bottom:16px;">
+    <tr><td class="c1" style="border:1px solid #999;padding:5px 8px;background:#e8e4d8;">Name</td><td class="c1" style="border:1px solid #999;padding:5px 8px;">{{ member.name }}</td></tr>
+    <tr><td class="c1" style="border:1px solid #999;padding:5px 8px;background:#e8e4d8;">{{ v.strings.member_number_label }}</td><td class="c1" style="border:1px solid #999;padding:5px 8px;">{{ member.member_no }}</td></tr>
+    <tr><td class="c1" style="border:1px solid #999;padding:5px 8px;background:#e8e4d8;">SSN (masked)</td><td class="c1" style="border:1px solid #999;padding:5px 8px;">{{ member.ssn_masked }}</td></tr>
+    <tr><td class="c1" style="border:1px solid #999;padding:5px 8px;background:#e8e4d8;">SSN</td><td class="c1" style="border:1px solid #999;padding:5px 8px;">{{ member.ssn_full }}</td></tr>
+    <tr><td class="c1" style="border:1px solid #999;padding:5px 8px;background:#e8e4d8;">Status</td><td class="c1" style="border:1px solid #999;padding:5px 8px;">{{ member.status }}</td></tr>
+    <tr><td class="c1" style="border:1px solid #999;padding:5px 8px;background:#e8e4d8;">Email</td><td class="c1" style="border:1px solid #999;padding:5px 8px;">{{ member.email }}</td></tr>
+  </table>
+  <div class="c1" style="font-weight:bold;margin-bottom:8px;">{{ v.strings.accounts_heading }}</div>
+  <table class="c1" style="border-collapse:collapse;background:#fff;">
+    <tr>
+      <td class="c1" style="border:1px solid #999;padding:5px 8px;background:#e8e4d8;font-weight:bold;">{{ v.strings.type_col }}</td>
+      <td class="c1" style="border:1px solid #999;padding:5px 8px;background:#e8e4d8;font-weight:bold;">{{ v.strings.nickname_col }}</td>
+      <td class="c1" style="border:1px solid #999;padding:5px 8px;background:#e8e4d8;font-weight:bold;">{{ v.strings.balance_col }}</td>
+    </tr>
+    {% for a in member.accounts %}
+    <tr>
+      <td class="c1" style="border:1px solid #999;padding:5px 8px;">{{ a.type }}</td>
+      <td class="c1" style="border:1px solid #999;padding:5px 8px;">{{ a.nickname }}</td>
+      <td class="c1" style="border:1px solid #999;padding:5px 8px;">{{ a.balance }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+{% elif page == "permission_denied" %}
+  <div class="c1" style="color:#900;">{{ flash_error or v.strings.permission_denied }}</div>
+
+{% elif page == "subaccount" %}
+  <div class="c1" style="font-size:16px;color:{{ v.theme.header_bg }};font-weight:bold;margin-bottom:12px;">{{ v.strings.subaccount_heading }}</div>
+  <form method="post" action="/subaccount/start" name="subStart" target="main">
+    <table class="c1" cellspacing="6">
+      <tr>
+        <td class="c1">{{ v.strings.select_member }}</td>
+        <td class="c1">
+          <select name="member_no" style="border:1px inset #999;">
+            {% for m in v.members %}
+            <option value="{{ m.member_no }}">{{ m.member_no }} — {{ m.name }}</option>
+            {% endfor %}
+          </select>
+        </td>
+      </tr>
+      <tr><td class="c1" colspan="2"><input type="submit" value="Continue" style="background:{{ v.theme.accent }};color:#fff;border:2px outset #ccc;padding:4px 12px;"></td></tr>
+    </table>
+  </form>
+
+{% elif page == "subaccount_form" %}
+  <div class="c1" style="font-size:16px;color:{{ v.theme.header_bg }};font-weight:bold;margin-bottom:12px;">{{ v.strings.subaccount_heading }}</div>
+  <form method="post" action="/subaccount/review" name="subForm" target="main">
+    <table class="c1" cellspacing="6">
+      <tr>
+        <td class="c1">{{ v.strings.account_type_label }}</td>
+        <td class="c1">
+          <select name="account_type" style="border:1px inset #999;">
+            <option value="Share Savings">Share Savings</option>
+            <option value="Checking">Checking</option>
+            <option value="Money Market">Money Market</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td class="c1">{{ v.strings.nickname_label }}</td>
+        <td class="c1"><input type="text" name="nickname" size="24" style="border:1px inset #999;padding:3px;"></td>
+      </tr>
+      <tr>
+        <td class="c1">{{ v.strings.deposit_label }}</td>
+        <td class="c1"><input type="text" name="initial_deposit" size="12" style="border:1px inset #999;padding:3px;"></td>
+      </tr>
+      {% if extra_field_label %}
+      <tr>
+        <td class="c1">{{ extra_field_label }}</td>
+        <td class="c1"><input type="text" name="branch_code" size="12" style="border:1px inset #999;padding:3px;"></td>
+      </tr>
+      {% endif %}
+      <tr>
+        <td class="c1" colspan="2">
+          <input type="submit" name="btnReview" value="{{ v.strings.submit_subaccount }}" style="background:{{ v.theme.accent }};color:#fff;border:2px outset #ccc;padding:4px 12px;">
+        </td>
+      </tr>
+    </table>
+  </form>
+
+{% elif page == "subaccount_review" and subaccount %}
+  <div class="c1" style="font-size:16px;color:{{ v.theme.header_bg }};font-weight:bold;margin-bottom:12px;">{{ v.strings.review_heading }}</div>
+  <table class="c1" style="border-collapse:collapse;background:#fff;">
+    <tr><td class="c1" style="border:1px solid #999;padding:5px 8px;background:#e8e4d8;">Member</td><td class="c1" style="border:1px solid #999;padding:5px 8px;">{{ subaccount.member_no }}</td></tr>
+    <tr><td class="c1" style="border:1px solid #999;padding:5px 8px;background:#e8e4d8;">{{ v.strings.account_type_label }}</td><td class="c1" style="border:1px solid #999;padding:5px 8px;">{{ subaccount.account_type }}</td></tr>
+    <tr><td class="c1" style="border:1px solid #999;padding:5px 8px;background:#e8e4d8;">{{ v.strings.nickname_label }}</td><td class="c1" style="border:1px solid #999;padding:5px 8px;">{{ subaccount.nickname }}</td></tr>
+    <tr><td class="c1" style="border:1px solid #999;padding:5px 8px;background:#e8e4d8;">{{ v.strings.deposit_label }}</td><td class="c1" style="border:1px solid #999;padding:5px 8px;">${{ subaccount.initial_deposit }}</td></tr>
+  </table>
+  <br>
+  <form method="post" action="/subaccount/confirm" name="subConfirm" target="main"
+    {% if confirm_dialog %}onsubmit="return confirm('Confirm open sub-account?');"{% endif %}>
+    <input type="submit" name="btnConfirm" value="{{ v.strings.confirm_subaccount }}" style="background:{{ v.theme.accent }};color:#fff;border:2px outset #ccc;padding:4px 12px;">
+  </form>
+
+{% elif page == "subaccount_done" and subaccount %}
+  <div class="c1" style="font-size:16px;color:{{ v.theme.header_bg }};font-weight:bold;margin-bottom:12px;">Confirmation</div>
+  <div class="c1" style="background:#d4edda;border:1px solid #2d6a4f;padding:8px;">
+    Sub-account opened. Confirmation {{ subaccount.confirmation }}
+  </div>
+
+{% else %}
+  <div class="c1">Unknown page</div>
+{% endif %}
+
+</td></tr></table>
+</body>
+</html>

@@ -1,0 +1,48 @@
+steps_by_id:
+  s1_open_search:
+    target:
+      strategies:
+      - by: role
+        role: link
+        name: Member Search
+      - by: role
+        role: link
+        name: Holder Lookup
+      - by: text
+        text: Holder Lookup
+        exact: true
+      - by: heuristic
+        text: Holder Lookup
+  s2_type_member:
+    target:
+      strategies:
+      - by: label_proximity
+        label: 'Member #'
+      - by: label_proximity
+        label: Account Holder No.
+      - by: name_attr
+        name: qry
+  s3_submit:
+    target:
+      strategies:
+      - by: heuristic
+        text: Find Member
+      - by: heuristic
+        text: Search
+      - by: role
+        role: button
+        name: Search
+  s5_extract:
+    extract:
+      savings_balance:
+        target:
+          frame:
+            name_hint: main
+          strategies:
+          - by: table_cell
+            row_header: Share Savings
+            column_header: Avail Bal
+          - by: table_cell
+            row_header: Share Savings
+            column_header: Balance
+        parse: currency

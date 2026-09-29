@@ -1,0 +1,21 @@
+{
+  "status": "failed",
+  "capability_id": "cucore.member.read_savings_balance",
+  "capability_version": "1.2.0",
+  "run_id": "05_replay_app_error_failed",
+  "outputs": null,
+  "outcome": null,
+  "failure": {
+    "step_id": "s5_extract",
+    "code": "APP_ERROR",
+    "expected": null,
+    "observed": "500",
+    "evidence_paths": [
+      "evidence/05_replay_app_error_failed/screenshots/app_error.png"
+    ]
+  },
+  "recoveries": [],
+  "drift_signals": [],
+  "duration_ms": 24841,
+  "intervention_id": null
+}

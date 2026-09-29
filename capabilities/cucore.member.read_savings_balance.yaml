@@ -1,0 +1,230 @@
+schema_version: '1.0'
+capability:
+  id: cucore.member.read_savings_balance
+  version: 1.2.0
+  title: Read a member's savings balance
+  description: Looks up a member by number and returns the Share Savings balance.
+  status: approved
+  app:
+    vendor: acme-cucore
+    product: CU Core Teller
+    compatible_versions: '>=7.2,<8'
+  inputs:
+    member_number:
+      type: string
+      pattern: ^[0-9]{4,10}$
+      format: null
+      sensitivity: internal_id
+      redact_in_logs: false
+      description: null
+  outputs:
+    savings_balance:
+      type: number
+      pattern: null
+      format: currency
+      sensitivity: financial
+      redact_in_logs: true
+      description: null
+  risk: read_only
+  preconditions:
+  - kind: authenticated_session
+  steps:
+  - id: s1_open_search
+    intent: Open member search from left nav
+    action: click
+    target:
+      ref: null
+      frame:
+        name_hint: nav
+        index_fallback: 0
+      strategies:
+      - by: role
+        role: link
+        name: Member Search
+        exact: false
+      - by: text
+        text: Member Search
+        exact: true
+      - by: heuristic
+        text: Member Search
+        value: null
+      visual_anchor: null
+    value: null
+    key: null
+    url: null
+    extract: null
+    expect: null
+    requires_confirmation: false
+    provenance: null
+  - id: s2_type_member
+    intent: Type member number into search field
+    action: type
+    target:
+      ref: null
+      frame:
+        name_hint: main
+        index_fallback: null
+      strategies:
+      - by: label_proximity
+        label: 'Member #'
+      - by: name_attr
+        name: qry
+      visual_anchor: null
+    value: '{{inputs.member_number}}'
+    key: null
+    url: null
+    extract: null
+    expect: null
+    requires_confirmation: false
+    provenance: null
+  - id: s3_submit
+    intent: Submit member search
+    action: click
+    target:
+      ref: null
+      frame:
+        name_hint: main
+        index_fallback: null
+      strategies:
+      - by: heuristic
+        text: Find Member
+        value: null
+      - by: role
+        role: button
+        name: Find Member
+        exact: false
+      visual_anchor: null
+    value: null
+    key: null
+    url: null
+    extract: null
+    expect:
+      kind: any_of
+      any_of:
+      - kind: text_visible
+        text: Test Member
+        then: continue
+        outcome: null
+      - kind: text_visible
+        text: No member found
+        then: null
+        outcome: member_not_found
+      - kind: text_visible
+        text: not authorized
+        then: null
+        outcome: permission_denied
+    requires_confirmation: false
+    provenance: null
+  - id: s4_open
+    intent: Open the member row
+    action: click
+    target:
+      ref: null
+      frame:
+        name_hint: main
+        index_fallback: null
+      strategies:
+      - by: role
+        role: link
+        name: Open
+        exact: false
+      - by: text
+        text: Open
+        exact: true
+      - by: heuristic
+        text: Open
+        value: null
+      visual_anchor: null
+    value: null
+    key: null
+    url: null
+    extract: null
+    expect:
+      kind: any_of
+      any_of:
+      - kind: text_visible
+        text: Share Savings
+        then: continue
+        outcome: null
+      - kind: text_visible
+        text: No member found
+        then: null
+        outcome: member_not_found
+      - kind: text_visible
+        text: not authorized
+        then: null
+        outcome: permission_denied
+    requires_confirmation: false
+    provenance: null
+  - id: s5_extract
+    intent: Extract Share Savings balance
+    action: extract
+    target: null
+    value: null
+    key: null
+    url: null
+    extract:
+      savings_balance:
+        target:
+          ref: null
+          frame:
+            name_hint: main
+            index_fallback: null
+          strategies:
+          - by: table_cell
+            row_header: Share Savings
+            column_header: Balance
+          visual_anchor: null
+        parse: currency
+    expect: null
+    requires_confirmation: false
+    provenance: null
+  outcomes:
+    member_not_found:
+      kind: business
+      outputs: {}
+    permission_denied:
+      kind: business
+      outputs: {}
+  recoverables:
+  - id: system_notice
+    detect:
+      kind: text_visible
+      text: System notice
+      then: null
+      outcome: null
+    handle:
+      action: click
+      target:
+        ref: null
+        frame: null
+        strategies:
+        - by: role
+          role: button
+          name: Acknowledge
+          exact: false
+        - by: heuristic
+          text: Acknowledge
+          value: null
+        visual_anchor: null
+      escalate: null
+    max_times: 3
+  - id: session_expired
+    detect:
+      kind: text_visible
+      text: Session expired
+      then: null
+      outcome: null
+    handle:
+      action: null
+      target: null
+      escalate: true
+    max_times: 1
+  success:
+  - kind: output_present
+    output: savings_balance
+    text: null
+  provenance:
+    discovered_by: null
+    goal_text: look up member {{member_number}} and read their savings balance
+    reviewed_by: seed

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{{ v.strings.product_name }} — Login</title>
+</head>
+<body style="margin:0;font-family:Courier New,monospace;background:#d4d0c8;">
+  <table class="c1" cellspacing="0" cellpadding="0" style="margin:80px auto;background:#fff;border:2px outset #999;">
+    <tr><td class="c1" colspan="2" style="background:{{ v.theme.header_bg }};color:#fff;font-weight:bold;padding:10px;">{{ v.strings.login_title }}</td></tr>
+    {% if error %}<tr><td class="c1" colspan="2" style="color:#900;font-size:12px;padding:6px 10px;">{{ error }}</td></tr>{% endif %}
+    <tr>
+      <td class="c1" colspan="2" style="padding:6px 10px;">
+        <form method="post" action="/login" name="logonForm">
+          <table class="c1" cellspacing="4">
+            <tr>
+              <td class="c1" style="font-size:13px;">Operator ID</td>
+              <td class="c1"><input type="text" name="username" value="" size="20" style="border:1px inset #999;"></td>
+            </tr>
+            <tr>
+              <td class="c1" style="font-size:13px;">Password</td>
+              <td class="c1"><input type="password" name="password" value="" size="20" style="border:1px inset #999;"></td>
+            </tr>
+            <tr>
+              <td class="c1" colspan="2" align="right">
+                <input type="submit" name="btnLogon" value="Log On" style="background:{{ v.theme.accent }};color:#fff;border:2px outset #ccc;padding:4px 14px;">
+              </td>
+            </tr>
+          </table>
+        </form>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

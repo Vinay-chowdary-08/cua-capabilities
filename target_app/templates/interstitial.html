@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<body style="font-family:Tahoma,sans-serif;background:#fff8e7;margin:40px;">
+  <div class="c1" style="border:2px solid {{ v.theme.accent }};padding:20px;max-width:480px;background:#fff;">
+    <div class="c1" style="font-size:18px;font-weight:bold;color:{{ v.theme.header_bg }};margin-bottom:8px;">{{ v.strings.interstitial_title }}</div>
+    <p class="c1">{{ v.strings.interstitial_body }}</p>
+    <form method="post" action="/interstitial/ack">
+      <input type="hidden" name="next" value="{{ next }}">
+      <input type="submit" name="btnAck" value="{{ v.strings.interstitial_ack }}" style="background:{{ v.theme.accent }};color:#fff;border:2px outset #ccc;padding:6px 14px;">
+    </form>
+  </div>
+</body>
+</html>

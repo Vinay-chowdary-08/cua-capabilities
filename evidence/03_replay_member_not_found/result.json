@@ -1,0 +1,13 @@
+{
+  "status": "business_outcome",
+  "capability_id": "cucore.member.read_savings_balance",
+  "capability_version": "1.2.0",
+  "run_id": "03_replay_member_not_found",
+  "outputs": null,
+  "outcome": "member_not_found",
+  "failure": null,
+  "recoveries": [],
+  "drift_signals": [],
+  "duration_ms": 12308,
+  "intervention_id": null
+}
