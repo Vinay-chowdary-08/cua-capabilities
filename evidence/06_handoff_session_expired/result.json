@@ -2,7 +2,7 @@
   "status": "success",
   "capability_id": "cucore.member.read_savings_balance",
   "capability_version": "1.2.0",
-  "run_id": "d299ec8d74a3",
+  "run_id": "3a3c394475cf",
   "outputs": {
     "savings_balance": 2418.55
   },
@@ -12,24 +12,24 @@
     {
       "id": "human_handoff",
       "step_id": "s2_type_member",
-      "detail": "SESSION_EXPIRED: operator resumed lease ea307631fb"
+      "detail": "SESSION_EXPIRED: operator resumed lease eccf1ab3c1"
     }
   ],
   "drift_signals": [],
-  "duration_ms": 26485,
-  "intervention_id": "ea307631fb",
+  "duration_ms": 26419,
+  "intervention_id": "eccf1ab3c1",
   "handoff_trail": {
-    "intervention_id": "ea307631fb",
+    "intervention_id": "eccf1ab3c1",
     "recoveries": [
       {
         "id": "human_handoff",
         "step_id": "s2_type_member",
-        "detail": "SESSION_EXPIRED: operator resumed lease ea307631fb"
+        "detail": "SESSION_EXPIRED: operator resumed lease eccf1ab3c1"
       }
     ],
     "operator_events": 4,
-    "sm_events": 17,
-    "human_actions": 13,
+    "sm_events": 12,
+    "human_actions": 8,
     "trace": "trace.zip"
   }
 }

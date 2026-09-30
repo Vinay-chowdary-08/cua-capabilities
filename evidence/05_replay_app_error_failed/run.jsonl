@@ -1,3 +1,11 @@
-{"ts": "2026-09-29T15:06:18.181999+00:00", "actor": "automation", "kind": "replay_start", "step_id": null, "data": {"capability_id": "cucore.member.read_savings_balance", "inputs_keys": ["member_number"]}}
-{"ts": "2026-09-29T15:06:43.023510+00:00", "actor": "automation", "kind": "screenshot", "step_id": null, "data": {"path": "screenshots/app_error.png"}}
-{"ts": "2026-09-29T15:06:43.098067+00:00", "actor": "automation", "kind": "trace", "step_id": null, "data": {"path": "trace.zip", "bytes": 173184}}
+{"ts": "2026-09-30T16:33:23.120579+00:00", "actor": "automation", "kind": "replay_start", "step_id": null, "data": {"capability_id": "cucore.member.read_savings_balance", "inputs_keys": ["member_number"]}}
+{"ts": "2026-09-30T16:33:25.193337+00:00", "actor": "automation", "kind": "step_act", "step_id": "s1_open_search", "data": {"action": "click", "intent": "Open member search from left nav", "locator_used": "role:Member Search", "preferred_strategy": "role:Member Search", "degraded": false, "value_is_param": false}}
+{"ts": "2026-09-30T16:33:25.226481+00:00", "actor": "automation", "kind": "step_ok", "step_id": "s1_open_search", "data": {"action": "click", "locator_used": "role:Member Search"}}
+{"ts": "2026-09-30T16:33:27.279481+00:00", "actor": "automation", "kind": "step_act", "step_id": "s2_type_member", "data": {"action": "type", "intent": "Type member number into search field", "locator_used": "label_proximity:Member #", "preferred_strategy": "label_proximity:Member #", "degraded": false, "value_is_param": true}}
+{"ts": "2026-09-30T16:33:27.290973+00:00", "actor": "automation", "kind": "step_ok", "step_id": "s2_type_member", "data": {"action": "type", "locator_used": "label_proximity:Member #"}}
+{"ts": "2026-09-30T16:33:29.323774+00:00", "actor": "automation", "kind": "step_act", "step_id": "s3_submit", "data": {"action": "click", "intent": "Submit member search", "locator_used": "heuristic:Find Member", "preferred_strategy": "heuristic:Find Member", "degraded": false, "value_is_param": false}}
+{"ts": "2026-09-30T16:33:29.337721+00:00", "actor": "automation", "kind": "step_ok", "step_id": "s3_submit", "data": {"action": "click", "locator_used": "heuristic:Find Member"}}
+{"ts": "2026-09-30T16:33:35.430973+00:00", "actor": "automation", "kind": "step_act", "step_id": "s4_open", "data": {"action": "click", "intent": "Open the member row", "locator_used": "role:Open", "preferred_strategy": "role:Open", "degraded": false, "value_is_param": false}}
+{"ts": "2026-09-30T16:33:35.458899+00:00", "actor": "automation", "kind": "step_ok", "step_id": "s4_open", "data": {"action": "click", "locator_used": "role:Open"}}
+{"ts": "2026-09-30T16:33:47.659715+00:00", "actor": "automation", "kind": "screenshot", "step_id": null, "data": {"path": "screenshots/app_error.png"}}
+{"ts": "2026-09-30T16:33:47.733596+00:00", "actor": "automation", "kind": "trace", "step_id": null, "data": {"path": "trace.zip", "bytes": 173107}}

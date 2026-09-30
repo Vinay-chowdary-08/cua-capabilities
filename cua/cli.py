@@ -6,7 +6,7 @@ import asyncio
 import json
 import os
 from pathlib import Path
-from typing import Optional
+from typing import Any, Optional
 
 import httpx
 import typer
@@ -187,6 +187,7 @@ async def _replay(
     from cua.evidence.logger import EvidenceLogger
     from cua.handoff.capture import HumanCapture
     from cua.handoff.control import get_shared_controller
+    from cua.handoff.remote import RemoteHandoffController
     from cua.replay.engine import ReplayEngine
     from cua.replay.result import ReplayStatus
     from cua.safety.policy import Policy
@@ -203,8 +204,20 @@ async def _replay(
         os.environ.get("CUA_EVIDENCE_DIR", "evidence"),
         run_id=evidence_name,
     )
-    # Same process-local controller the operator console serves — not a private copy.
-    handoff = get_shared_controller() if allow_handoff else None
+    # Cross-process: CUA_OPERATOR_URL=http://127.0.0.1:8900 talks to the console.
+    # Same-process fallback: SHARED_CONTROLLER (only works if operator imported in-proc).
+    operator_url = os.environ.get("CUA_OPERATOR_URL", "").strip()
+    handoff: Any = None
+    if allow_handoff:
+        if operator_url:
+            handoff = RemoteHandoffController(operator_url)
+            console.print(f"[cyan]Handoff[/cyan] remote → {operator_url}")
+        else:
+            handoff = get_shared_controller()
+            console.print(
+                "[yellow]Handoff[/yellow] in-process SHARED_CONTROLLER "
+                "(set CUA_OPERATOR_URL for dual-terminal operator)"
+            )
     surface = WebSurface(
         headless=not headed,
         base_url=url,
@@ -212,7 +225,7 @@ async def _replay(
     )
     await surface.start()
     capture: HumanCapture | None = None
-    if handoff is not None:
+    if handoff is not None and not isinstance(handoff, RemoteHandoffController):
         capture = HumanCapture(handoff)
         await capture.install(surface.page)
     try:

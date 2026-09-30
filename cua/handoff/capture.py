@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from cua.handoff.control import HandoffController
+from cua.handoff.control import ControlState, HandoffController
 from cua.safety.redact import Redactor
 
 
@@ -46,6 +46,10 @@ class HumanCapture:
 
     async def install(self, page: Any) -> None:
         async def _on_action(source: Any, payload: dict[str, Any]) -> None:  # noqa: ARG001
+            # Only attribute UI events to a human while the lease is in HUMAN.
+            # After verify_ok, automation owns the page again — don't pollute operator_log.
+            if self.controller.state != ControlState.HUMAN:
+                return
             if "value_redacted" in payload and payload["value_redacted"]:
                 payload["value_redacted"] = self.redactor.redact_text(str(payload["value_redacted"]))
             self.controller.record_human_action(payload)

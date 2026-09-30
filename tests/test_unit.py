@@ -237,3 +237,32 @@ def test_llm_decide_signature_requires_safe_png() -> None:
 
     sig = inspect.signature(AgentLoop._llm_decide)
     assert "safe_png" in sig.parameters
+
+
+@pytest.mark.asyncio
+async def test_human_capture_ignores_automation_clicks() -> None:
+    from cua.handoff.capture import HumanCapture
+    from cua.handoff.control import ControlState, HandoffController
+
+    c = HandoffController()
+    cap = HumanCapture(c)
+
+    class FakePage:
+        frames: list[Any] = []
+
+        async def expose_binding(self, name: str, fn: Any) -> None:
+            self.fn = fn
+
+        async def add_init_script(self, script: str) -> None:
+            return None
+
+    page = FakePage()
+    await cap.install(page)  # type: ignore[arg-type]
+    # Automation owns control — event discarded
+    await page.fn(None, {"kind": "click", "text": "Find Member"})
+    assert c.captured_actions == []
+    # Human owns control — event recorded
+    c.state = ControlState.HUMAN
+    await page.fn(None, {"kind": "click", "text": "Member Search", "value_redacted": ""})
+    assert len(c.captured_actions) == 1
+    assert c.captured_actions[0]["text"] == "Member Search"

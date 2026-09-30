@@ -1,21 +1,16 @@
-{"kind": "saw_request", "lease_id": "ea307631fb", "reason": "session expired", "step_id": "s2_type_member", "state": "awaiting_human"}
-{"kind": "claimed", "owner": "morgan.teller", "lease_id": "ea307631fb", "state": "human"}
+{"kind": "saw_request", "lease_id": "eccf1ab3c1", "reason": "session expired", "step_id": "s2_type_member", "state": "awaiting_human"}
+{"kind": "claimed", "owner": "morgan.teller", "lease_id": "eccf1ab3c1", "state": "human"}
 {"kind": "resume_clicked", "note": "relogin done", "state": "verifying"}
 {"kind": "verify_ok", "state": "automation"}
-{"source": "state_machine", "ts": 1790694435.8380845, "kind": "human_action", "data": {"kind": "click", "tag": "A", "name": null, "role": null, "value_redacted": "", "text": "Member Search"}}
-{"source": "state_machine", "ts": 1790694439.9389093, "kind": "awaiting_human", "data": {"reason": "session expired", "id": "ea307631fb"}}
-{"source": "state_machine", "ts": 1790694439.9612186, "kind": "claimed", "data": {"owner": "morgan.teller"}}
-{"source": "state_machine", "ts": 1790694439.9774246, "kind": "human_action", "data": {"kind": "note", "text": "cleared session_expire fault from /__faults"}}
-{"source": "state_machine", "ts": 1790694440.50528, "kind": "human_action", "data": {"kind": "change", "tag": "INPUT", "name": "username", "role": null, "value_redacted": "teller", "text": ""}}
-{"source": "state_machine", "ts": 1790694440.5505931, "kind": "human_action", "data": {"kind": "change", "tag": "INPUT", "name": "password", "role": null, "value_redacted": "[SECRET]", "text": ""}}
-{"source": "state_machine", "ts": 1790694440.5509343, "kind": "human_action", "data": {"kind": "click", "tag": "INPUT", "name": "btnLogon", "role": null, "value_redacted": "Log On", "text": ""}}
-{"source": "state_machine", "ts": 1790694440.5517085, "kind": "human_action", "data": {"kind": "submit", "tag": "FORM"}}
-{"source": "state_machine", "ts": 1790694441.1414096, "kind": "human_action", "data": {"kind": "login", "text": "re-authenticated as teller on live session"}}
-{"source": "state_machine", "ts": 1790694441.2697363, "kind": "human_action", "data": {"kind": "click", "tag": "A", "name": null, "role": null, "value_redacted": "", "text": "Member Search"}}
-{"source": "state_machine", "ts": 1790694441.2723353, "kind": "human_action", "data": {"kind": "click", "text": "Member Search", "strategy": "role:Member Search", "why": "restore search page for the interrupted step"}}
-{"source": "state_machine", "ts": 1790694443.8743842, "kind": "verifying", "data": {"note": "back on workstation home; handing control to automation"}}
-{"source": "state_machine", "ts": 1790694443.8744285, "kind": "automation_resumed", "data": {}}
-{"source": "state_machine", "ts": 1790694448.0011277, "kind": "human_action", "data": {"kind": "change", "tag": "INPUT", "name": "qry", "role": null, "value_redacted": "12345", "text": ""}}
-{"source": "state_machine", "ts": 1790694448.0022342, "kind": "human_action", "data": {"kind": "click", "tag": "INPUT", "name": "btnFind", "role": null, "value_redacted": "Find Member", "text": ""}}
-{"source": "state_machine", "ts": 1790694448.0025594, "kind": "human_action", "data": {"kind": "submit", "tag": "FORM"}}
-{"source": "state_machine", "ts": 1790694454.1152942, "kind": "human_action", "data": {"kind": "click", "tag": "A", "name": null, "role": null, "value_redacted": "", "text": "Open"}}
+{"source": "state_machine", "ts": 1790786064.5236955, "kind": "awaiting_human", "data": {"reason": "session expired", "id": "eccf1ab3c1"}}
+{"source": "state_machine", "ts": 1790786064.549009, "kind": "claimed", "data": {"owner": "morgan.teller"}}
+{"source": "state_machine", "ts": 1790786064.5647583, "kind": "human_action", "data": {"kind": "note", "text": "cleared session_expire fault from /__faults"}}
+{"source": "state_machine", "ts": 1790786065.0900128, "kind": "human_action", "data": {"kind": "change", "tag": "INPUT", "name": "username", "role": null, "value_redacted": "teller", "text": ""}}
+{"source": "state_machine", "ts": 1790786065.132917, "kind": "human_action", "data": {"kind": "change", "tag": "INPUT", "name": "password", "role": null, "value_redacted": "[SECRET]", "text": ""}}
+{"source": "state_machine", "ts": 1790786065.1332362, "kind": "human_action", "data": {"kind": "click", "tag": "INPUT", "name": "btnLogon", "role": null, "value_redacted": "Log On", "text": ""}}
+{"source": "state_machine", "ts": 1790786065.133959, "kind": "human_action", "data": {"kind": "submit", "tag": "FORM"}}
+{"source": "state_machine", "ts": 1790786065.7046783, "kind": "human_action", "data": {"kind": "login", "text": "re-authenticated as teller on live session"}}
+{"source": "state_machine", "ts": 1790786065.8190587, "kind": "human_action", "data": {"kind": "click", "tag": "A", "name": null, "role": null, "value_redacted": "", "text": "Member Search"}}
+{"source": "state_machine", "ts": 1790786065.8228934, "kind": "human_action", "data": {"kind": "click", "text": "Member Search", "strategy": "role:Member Search", "why": "restore search page for the interrupted step"}}
+{"source": "state_machine", "ts": 1790786068.4196813, "kind": "verifying", "data": {"note": "back on workstation home; handing control to automation"}}
+{"source": "state_machine", "ts": 1790786068.4197273, "kind": "automation_resumed", "data": {}}

@@ -87,8 +87,12 @@ irreversible confirm: `AWAITING_HUMAN` → claim → `HUMAN` → Resume → `VER
 Evidence run `06` walks that path in-process with a scripted operator (same
 Chromium, CDP port armed, `HumanCapture` installed): fault → lease → claim →
 re-login → restore Member Search → resume → verify → SUCCESS with
-`intervention_id` + `human_handoff` recovery. The FastAPI `/operator` UI talks
-to the same shared controller when run in-process with replay.
+`intervention_id` + `human_handoff` recovery. `HumanCapture` only records while
+the lease is in `HUMAN`, so post-resume automation clicks are not mislabeled.
+
+For dual-terminal use: run `cua operator` and set
+`CUA_OPERATOR_URL=http://127.0.0.1:8900` on `cua replay --allow-handoff` so
+replay posts leases to the console over HTTP (`cua/handoff/remote.py`).
 
 ## Safety
 

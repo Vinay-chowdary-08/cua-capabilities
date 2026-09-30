@@ -2,7 +2,7 @@
   "status": "success",
   "capability_id": "cucore.member.read_savings_balance",
   "capability_version": "1.2.0",
-  "run_id": "2ed3dde7bf7c",
+  "run_id": "5114a8a283c2",
   "outputs": {
     "savings_balance": 2418.55
   },
@@ -38,6 +38,6 @@
       ]
     }
   ],
-  "duration_ms": 27467,
+  "duration_ms": 27454,
   "intervention_id": null
 }

@@ -21,6 +21,8 @@ uv run cua seed
 uv run cua serve-target --variant tenant_a --port 8800
 # other terminal:
 uv run cua operator --port 8900
+# For dual-terminal handoff, also export:
+#   export CUA_OPERATOR_URL=http://127.0.0.1:8900
 
 uv run cua replay cucore.member.read_savings_balance --input member_number=12345
 uv run cua replay cucore.member.read_savings_balance --input member_number=99999

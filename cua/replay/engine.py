@@ -341,6 +341,20 @@ class ReplayEngine:
                         )
                     )
                 outputs[out_name] = _parse_value(text, field.parse)
+                if self.evidence:
+                    self.evidence.log_event(
+                        "step_act",
+                        {
+                            "action": "extract",
+                            "intent": step.intent,
+                            "output": out_name,
+                            "locator_used": strat,
+                            "preferred_strategy": preferred,
+                            "degraded": degraded,
+                        },
+                        actor="automation",
+                        step_id=step.id,
+                    )
             return None
         else:
             try:
@@ -397,6 +411,21 @@ class ReplayEngine:
                         actor="automation",
                     )
 
+            if self.evidence:
+                self.evidence.log_event(
+                    "step_act",
+                    {
+                        "action": step.action,
+                        "intent": step.intent,
+                        "locator_used": strat,
+                        "preferred_strategy": preferred,
+                        "degraded": degraded,
+                        "value_is_param": bool(step.value and "{{inputs." in (step.value or "")),
+                    },
+                    actor="automation",
+                    step_id=step.id,
+                )
+
             loc = handle.meta.get("locator")
             if step.action == "click" and loc:
                 await loc.click(timeout=8000)
@@ -405,6 +434,14 @@ class ReplayEngine:
             elif step.action == "select" and loc:
                 await loc.select_option(value or "", timeout=8000)
             await self.surface.act(Action(kind=ActionKind.WAIT, meta={"ms": 250}))
+
+            if self.evidence:
+                self.evidence.log_event(
+                    "step_ok",
+                    {"action": step.action, "locator_used": strat},
+                    actor="automation",
+                    step_id=step.id,
+                )
 
         # Evaluate expect
         if step.expect:
