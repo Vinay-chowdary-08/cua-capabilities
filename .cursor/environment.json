@@ -1,12 +1,4 @@
 {
-  "name": "cua-capabilities",
-  "install": "curl -LsSf https://astral.sh/uv/install.sh | sh\nexport PATH=\"$HOME/.local/bin:$PATH\"\nuv sync --extra dev\nuv run playwright install chromium --with-deps",
-  "start": "export PATH=\"$HOME/.local/bin:$PATH\"\nuv run cua serve-target --variant tenant_a --port 8800",
-  "terminals": [
-    {
-      "name": "operator",
-      "command": "export PATH=\"$HOME/.local/bin:$PATH\"; uv run cua operator --port 8900"
-    }
-  ],
-  "ports": [8800, 8900]
+  "install": "curl -LsSf https://astral.sh/uv/install.sh | sh\nexport PATH=\"$HOME/.local/bin:$PATH\"\nuv sync --extra dev\nuv run playwright install chromium",
+  "start": "export PATH=\"$HOME/.local/bin:$PATH\"\nuv run cua serve-target --variant tenant_a --port 8800"
 }
